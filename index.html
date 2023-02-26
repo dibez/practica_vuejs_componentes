@@ -39,9 +39,9 @@
                         <button @click="closeForm(card.id)" class="btn btn-primary w-25">Cerrar</button>
                     </div>
                 <div class="container mt-4 mb-3" v-else>
-                    <div v-for="card in card.data">
-                        <p class="fw-bold m-0">{{card.prompt}}</p>
-                        <p>{{card.value}}</p>
+                    <div v-for="item in card.data">
+                        <p class="fw-bold m-0">{{item.prompt}}</p>
+                        <p>{{item.value}}</p>
                     </div>
                     <a :href="card.href" class="btn btn-primary w-25" target="_blank">Ver</a>
                 </div>
