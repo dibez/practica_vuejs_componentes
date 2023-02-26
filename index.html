@@ -12,10 +12,28 @@
 
     <body>
 
-        <h1 id="autor">Autor: TU NOMBRE AQUÍ</h1>
+        <h1 id="autor">Autor: Diego Bellido</h1>
 
         <!-- https://vuejs.org/v2/guide/index.html -->
         <div id="app">
+            <div class="container-fluid">
+                <div class="jumbotron bg-light p-5">
+                    <h1 id="title">{{col.collection.title}}</h1>
+                </div>
+            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    <div v-for="card in col.collection.items" class="card col-lg-4">
+                        <div v-for="item in card.data">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.prompt}}</h5>
+                                <p class="card-text">{{item.value}}</p>
+                            </div>
+                        </div>
+                        <a :href="card.href" class="btn btn-primary w-25 card-link m-2" target="_blank">Ver</a>
+                    </div>
+                </div>
+            </div>
             <!--
                  TODO: Aplicación VueJS. Ver archivo ./js/script.js
                - Mostrar el título de la colección dentro de un componente Jumbotron de Bootstrap https://getbootstrap.com/docs/4.0/components/jumbotron/. En su interior habrá un <h1> con id "title" que mostrará el título de la colección
