@@ -8,66 +8,63 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- TODO: Cargar CSS Bootstrap (no es necesario el JS) -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     </head>
-
     <body>
-
-        <h1 id="autor">Autor: Diego Bellido</h1>
+        <div class="container-fluid">
+            <h1 id="autor">Autor: Diego Bellido</h1>
+        </div>
 
         <!-- https://vuejs.org/v2/guide/index.html -->
         <div id="app">
-            <div class="container-fluid">
-                <div class="jumbotron bg-light p-5">
-                    <h1 id="title">{{col.collection.title}}</h1>
+            <div class="bg-light p-3 jumbotron">
+              <h1 id="title">{{col.collection.title}}</h1>
+            </div>
+            <div class="my-div">
+              
+              <item-data :col="col" v-if="col.collection.showEditForm"></item-data>
+              <edit-form :col="col" v-else="col.collection.showEditForm"></edit-form>
+            </div>
+        </div>
+
+        <!-- Plantilla para el componente edit-form -->
+        <script type="text/x-template" id="edit-form" >
+            <div class="container row mx-auto">
+                <div v-for="card in col.collection.items" class="col-md-4 mb-3 card">
+                    <div class="container mt-4 mb-3" v-if="col.collection.idEditar == card.id">
+                        <div v-for="item in card.data" class="mt-4 mb-4">
+                            <p class="fw-bold m-0 mb-1">{{item.prompt}}</p>
+                            <textarea type="text" class="form-control" :ref="item.name" :value="item.value"></textarea>
+                        </div>
+                        <button @click="closeForm(card.id)" class="btn btn-primary w-25">Cerrar</button>
+                    </div>
+                <div class="container mt-4 mb-3" v-else>
+                    <div v-for="card in card.data">
+                        <p class="fw-bold m-0">{{card.prompt}}</p>
+                        <p>{{card.value}}</p>
+                    </div>
+                    <a :href="card.href" class="btn btn-primary w-25" target="_blank">Ver</a>
                 </div>
             </div>
-            <div class="container mt-5">
-                <div class="row">
-                    <div v-for="card in col.collection.items" class="card col-lg-4">
+       </script>
+       <script type="text/x-template" id="item-data">
+            <div class="container row mx-auto">
+                <div v-for="card in col.collection.items" class="col-md-4 mb-3 card">
+                    <div class="container mt-4 mb-3">
                         <div v-for="item in card.data">
-                            <div class="card-body">
-                                <h5 class="card-title">{{item.prompt}}</h5>
-                                <p class="card-text">{{item.value}}</p>
-                            </div>
+                            <p class="fw-bold m-0">{{item.prompt}}</p>
+                            <p>{{item.value}}</p>
                         </div>
-                        <a :href="card.href" class="btn btn-primary w-25 card-link m-2" target="_blank">Ver</a>
+                        <a :href="card.href" class="btn btn-primary w-25" target="_blank">Ver</a>
+                        <button @click="toggleEditFormVisibility(card.id)" class="btn btn-primary w-25">Editar</button>
                     </div>
                 </div>
             </div>
-            <!--
-                 TODO: Aplicación VueJS. Ver archivo ./js/script.js
-               - Mostrar el título de la colección dentro de un componente Jumbotron de Bootstrap https://getbootstrap.com/docs/4.0/components/jumbotron/. En su interior habrá un <h1> con id "title" que mostrará el título de la colección
-               - Para cada item: (https://vuejs.org/v2/guide/index.html#Conditionals-and-Loops)
-                 - Crear un componente item-data
-            -->
-
-        </div>
-
-
-
-        <!-- Plantilla para el componente edit-form -->
-        <script type="text/x-template" id="editForm">
-
-            <!--
-                 TODO: Componente edit-form
-            -->
-
         </script>
-
-
-
-        <!-- Plantilla para el componente item-data -->
-        <script type="text/x-template" id="itemData">
-
-            <!--
-                 TODO: Componente item-data
-            -->
-
-        </script>
-
 
         <!-- TODO: Cargar librería VueJS y archivo js/script.js -->
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="/js/script.js"></script>
     </body>
-
 </html>
