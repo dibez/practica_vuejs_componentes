@@ -52,7 +52,7 @@ module.exports = {
 
     'Nombre del autor' : function (browser) {
         browser
-            .url('http://localhost:3000/')
+            .url('http://127.0.0.1:5500/')
             .waitForElementVisible('body');
 
         browser.expect.element("#autor").text.to.not.equal('Autor: TU NOMBRE AQUÍ');
@@ -61,7 +61,7 @@ module.exports = {
 
     'Título colección' : function(browser) {
         browser
-            .url('http://localhost:3000/')
+            .url('http://127.0.0.1:5500/')
             .waitForElementVisible('body')
             .verify.elementPresent(".jumbotron h1#title")
             .verify.containsText(".jumbotron h1#title","Movie List")
@@ -69,7 +69,7 @@ module.exports = {
 
     'Elementos' : function(browser) {
         browser
-            .url('http://localhost:3000/')
+            .url('http://127.0.0.1:5500/')
             .waitForElementVisible('body');
 
         for (it of server_data.collection.items) {
